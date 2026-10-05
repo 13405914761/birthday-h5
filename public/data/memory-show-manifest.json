@@ -1,0 +1,117 @@
+{
+  "_comment": "回忆放映厅照片 manifest 示例。URL 一律留空——私人照片不得在原型中虚构/占位为真实图；接入真照片时再填 src 多格式组。focalX/focalY 为 0-1 横纵裁切焦点（object-position）。date 仅展示用，发布前按 §15.9/§11 处理隐私。",
+  "schemaVersion": "1.0.0",
+  "totalDurationSec": 38,
+  "photoSlots": [
+    {
+      "id": "screen-01",
+      "filename": "photos/screen/01-first-outing",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）第一次一起出门",
+      "date": "",
+      "caption": "第一次一起出门",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.0
+    },
+    {
+      "id": "screen-02",
+      "filename": "photos/screen/02-your-smile",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）你笑起来的样子",
+      "date": "",
+      "caption": "你笑起来的样子",
+      "focalX": 0.5,
+      "focalY": 0.45,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-03",
+      "filename": "photos/screen/03-long-dinner",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）那顿很久很久的晚饭",
+      "date": "",
+      "caption": "那顿很久很久的晚饭",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-04",
+      "filename": "photos/screen/04-shared-umbrella",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）下雨天共用一把伞",
+      "date": "",
+      "caption": "下雨天共用一把伞",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-05",
+      "filename": "photos/screen/05-casual-sunset",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）随手拍的日落",
+      "date": "",
+      "caption": "随手拍的日落",
+      "focalX": 0.5,
+      "focalY": 0.6,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-06",
+      "filename": "photos/screen/06-lazy-afternoon",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）躺在一起什么也没做",
+      "date": "",
+      "caption": "躺在一起什么也没做",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-07",
+      "filename": "photos/screen/07-autumn-2023",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）2023 的那个秋天",
+      "date": "2023-10",
+      "caption": "2023 的那个秋天",
+      "focalX": 0.5,
+      "focalY": 0.45,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-08",
+      "filename": "photos/screen/08-graduation-2024",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）2024 毕业那天",
+      "date": "2024-06",
+      "caption": "2024 毕业那天",
+      "focalX": 0.5,
+      "focalY": 0.4,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-09",
+      "filename": "photos/screen/09-the-sea",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）一起去过的海",
+      "date": "",
+      "caption": "一起去过的海",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.5
+    },
+    {
+      "id": "screen-10",
+      "filename": "photos/screen/10-to-be-continued",
+      "src": { "avif": "", "webp": "", "jpg": "" },
+      "alt": "（待上传）还有好多照片要一起拍",
+      "date": "",
+      "caption": "还有好多照片要一起拍",
+      "focalX": 0.5,
+      "focalY": 0.5,
+      "durationSec": 3.0
+    }
+  ]
+}
