@@ -11,6 +11,9 @@ build/
 # Environment files
 .env.local
 
+# Temporary uploaded source assets
+public/obj_*.m4a
+
 # Logs
 *.log
 npm-debug.log*
