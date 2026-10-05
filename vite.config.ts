@@ -36,10 +36,13 @@ function miaodaOutputPlugin(): Plugin {
           recursive: true,
         });
       }
-      // assets → CDN 桶
+      // assets → CDN 桶，同时保留一份在 output，兼容 Cloudflare Pages 等静态托管。
       const assets = path.join(client, 'assets');
       if (fs.existsSync(assets)) {
         fs.cpSync(assets, path.join(outputResource, 'assets'), {
+          recursive: true,
+        });
+        fs.cpSync(assets, path.join(output, 'assets'), {
           recursive: true,
         });
       }
