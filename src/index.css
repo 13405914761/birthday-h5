@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 @import "./tailwind-theme.css";
 @import "./typography.css";
+@import "./room.css";
 
 html { scroll-behavior: smooth; background: #f8f0dc; }
 body { margin: 0; overflow-x: hidden; font-family: var(--font-sans); }
