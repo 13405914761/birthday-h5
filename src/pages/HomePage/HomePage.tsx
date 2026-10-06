@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, Bug, Music2, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import AgeChapter from '@/components/AgeChapter';
+import CoverScene from '@/components/CoverScene';
 import MemoryShow from '@/components/MemoryShow';
 import PuppyPair from '@/components/PuppyPair';
 import UnlockSheet from '@/components/UnlockSheet';
@@ -58,13 +59,16 @@ export default function HomePage() {
   return (
     <main className="birthday-app">
       <section id="cover" className="cover-section">
+        <CoverScene />
         <div className="cover-paper">
-          <div className="cover-meta"><span>TO BINBIN</span><span>2001—2026</span></div>
-          <motion.div initial={reduced ? false : { opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
-            <p className="cover-kicker">迟到的二十三次生日</p>
-            <h1>以前没能陪你长大，<br />这次想一岁一岁补给你。</h1>
-            <p className="cover-copy">给缤缤。从一岁开始，每拆开一份礼物，就解锁下一页。</p>
-          </motion.div>
+          <div className="cover-meta"><span>给缤的</span><span>2001—2026</span></div>
+          <div className="cover-copy-panel">
+            <motion.div initial={reduced ? false : { opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
+              <p className="cover-kicker">每岁生日祝福</p>
+              <h1>没能陪伴你长大<br />这次都补给你！</h1>
+              <p className="cover-copy">从一岁开始，每拆开一份礼物，就解锁下一页。</p>
+            </motion.div>
+          </div>
           <PuppyPair mood="hug" />
           <div className="cover-actions">
             <Button type="button" className="paper-button" onClick={() => { setStarted(true); document.getElementById('age-1')?.scrollIntoView({ behavior: 'smooth' }); }}>开始重新长大 <ArrowDown /></Button>
@@ -73,9 +77,9 @@ export default function HomePage() {
               <Music2 />
               <span>{musicOn ? '关闭音乐' : '开启音乐'}</span>
             </label>
-            {/* <Button type="button" variant="outline" className={debugSkipPasswords ? 'debug-toggle is-on' : 'debug-toggle'} onClick={toggleDebugPasswords} aria-pressed={debugSkipPasswords}>
+            <Button type="button" variant="outline" className={debugSkipPasswords ? 'debug-toggle is-on' : 'debug-toggle'} onClick={toggleDebugPasswords} aria-pressed={debugSkipPasswords}>
               <Bug />调试：{debugSkipPasswords ? '密码已关闭' : '密码已开启'}
-            </Button> */}
+            </Button>
           </div>
           {completed.length > 0 && <button type="button" className="continue-link" onClick={() => document.getElementById(`age-${Math.min(25, maxUnlocked)}`)?.scrollIntoView({ behavior: 'smooth' })}>继续上次看到的地方</button>}
         </div>
@@ -99,9 +103,9 @@ export default function HomePage() {
       <section id="finale" className={`finale-section ${!memoryDone ? 'is-locked' : ''}`}>
         <div className="finale-card">
           <p>FINAL CHAPTER</p>
-          <h2>缤缤，25岁生日快乐</h2>
+          <h2>宝宝！25岁生日快乐</h2>
           <PuppyPair mood="gift" />
-          <blockquote>前面的生日，是我想象着陪你走过。<br />从现在开始，未来的每一岁，我都想在场。</blockquote>
+          <blockquote>前面的生日，是我想象着陪你走过。<br />从现在开始，未来的每一岁我都在你身边</blockquote>
           <div className="finale-dots" aria-label={`${completed.length}个章节已完成`}>
             {CHAPTERS.map((chapter) => <span key={chapter.id} className={completed.includes(chapter.id) ? 'done' : ''} />)}
           </div>

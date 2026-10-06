@@ -35,8 +35,8 @@ export const CHAPTERS: IChapter[] = [
   { id:19, age:19, year:2020, title:'给十九岁的你', gift:'答案之书', password:'091', image:'ch19-age19.png', body:'没有标准答案也没关系，我们可以一起找。', action:'打开这一岁', motion:'书页翻动后停在这一页' },
   { id:20, age:20, year:2021, title:'给二十岁的你', gift:'刮刮乐', password:'023', image:'ch20-age20.png', body:'愿生活偶尔给你一些意想不到的小惊喜。', action:'打开这一岁', motion:'刮开区一点点显影' },
   { id:21, age:21, year:2022, title:'给二十一岁的你', gift:'沐浴露', password:'100', image:'ch21-age21.png', body:'走向更大的世界，也要好好照顾自己。', action:'打开这一岁', motion:'水珠缓落，泡泡轻晃' },
-  { id:22, age:22, year:2023, title:'这一岁，我们相遇了', gift:'相恋记忆桥', image:'ch22-bridge22.png', body:'2023年10月24日。前面的生日是想象，从这里开始，我终于出现在你的故事里。', bridge:true, action:'我记得了，继续', motion:'两只小狗依偎，尾巴轻轻碰到一起' },
-  { id:23, age:23, year:2024, title:'这一岁，我们毕业了', gift:'毕业记忆桥', image:'ch23-bridge23.png', body:'穿过校园与夏天，我们把青春认真收进同一张毕业照。', bridge:true, action:'我记得了，继续', motion:'学士帽流苏轻摆，两只小狗相视一笑' },
+  { id:22, age:22, year:2023, title:'这一岁，我们相遇了', gift:'相恋记忆桥', image:'ch22-bridge22.jpg', body:'2023年10月24日。从这里开始，我终于出现在你的故事里。', bridge:true, action:'我记得了，继续', motion:'两只小狗依偎，尾巴轻轻碰到一起' },
+  { id:23, age:23, year:2024, title:'这一岁，我们毕业了', gift:'毕业记忆桥', image:'ch23-bridge23.jpg', body:'穿过校园与夏天，我们把青春认真收进同一张毕业照。', bridge:true, action:'我记得了，继续', motion:'学士帽流苏轻摆，两只小狗相视一笑' },
   { id:24, age:24, year:2025, title:'给二十四岁的你', gift:'薯条兑换券', password:'003', image:'ch24-age24.png', body:'海口让我们第一次没能一起过生日，但距离没有让祝福迟到。', action:'打开这一岁', motion:'票根轻晃，远处的小狗挥爪' },
   { id:25, age:25, year:2026, title:'给二十五岁的你', gift:'照片打印机', password:'004', image:'ch25-age25.png', body:'我在实习，你来了。以后想把我们更多的日子，慢慢打印出来。', action:'打开这一岁', motion:'相纸慢慢吐出，两只小狗蹲在出口等' },
 ];

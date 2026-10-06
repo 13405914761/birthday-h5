@@ -3,7 +3,7 @@ import { ChevronDown, Gift, LockKeyhole } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Image } from '@/components/ui/image';
 import type { IChapter } from '@/data/chapters';
-import PuppyPair from '@/components/PuppyPair';
+import PuppyPose from '@/components/PuppyPose';
 
 interface AgeChapterProps {
   chapter: IChapter;
@@ -16,7 +16,6 @@ interface AgeChapterProps {
 export default function AgeChapter({ chapter, unlocked, completed, onOpen, onBridgeComplete }: AgeChapterProps) {
   const reduced = useReducedMotion();
   const base = (import.meta.env.MIAODA_CLIENT_BASE_PATH || '').replace(/\/$/, '') + '/';
-  const mood = chapter.age === 6 ? 'sleep' : chapter.bridge ? 'hug' : chapter.age === 25 ? 'gift' : 'wave';
   return (
     <section id={`age-${chapter.age}`} className={`age-section ${!unlocked ? 'is-locked' : ''}`} aria-label={`${chapter.age}岁章节`}>
       <motion.div
@@ -45,7 +44,7 @@ export default function AgeChapter({ chapter, unlocked, completed, onOpen, onBri
           <Image src={`${base}proto/${chapter.image}`} alt={`${chapter.age}岁：${chapter.gift}`} />
           <span className="photo-caption">{chapter.gift}</span>
         </motion.div>
-        <PuppyPair mood={mood} />
+        <PuppyPose age={chapter.age} />
         <p className="motion-caption">{chapter.motion}</p>
         <div className="chapter-action">
           {unlocked ? (
