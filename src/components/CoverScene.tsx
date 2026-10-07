@@ -9,7 +9,7 @@ export default function CoverScene() {
         className="cover-scene-image"
         src={`${base}cover/wheat-puppies.png`}
         alt=""
-        animate={reduced ? undefined : { scale: [1.035, 1.065, 1.035], x: [0, -5, 0] }}
+        animate={reduced ? undefined : { scale: [.78, .815, .78], x: [0, -5, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <div className="wind-wash wind-one" />
