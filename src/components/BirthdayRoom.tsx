@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Canvas, type ThreeEvent, useLoader } from '@react-three/fiber';
 import { OrbitControls, RoundedBox, Text } from '@react-three/drei';
 import { CalendarDays, ChevronLeft, ChevronRight, Tv, X } from 'lucide-react';
@@ -22,7 +22,7 @@ function Cake(){return <group>
  {([[-.25,.72,.05],[.25,.72,-.02],[-.08,.75,-.22]] as V3[]).map((p,i)=><mesh key={i} position={p}><sphereGeometry args={[.11,16,16]}/><meshStandardMaterial color="#c53c46" roughness={.45}/></mesh>)}
  {[-.24,-.12,0,.12,.24].map((x,i)=><group key={x} position={[x,.94,0]}><Box position={[0,0,0]} args={[.035,.42,.035]} color={i%2?'#74a6c4':'#d78778'} radius={.008}/><mesh position={[0,.25,0]}><sphereGeometry args={[.055,10,10]}/><meshStandardMaterial color="#ffbf47" emissive="#ff8a22" emissiveIntensity={2}/></mesh></group>)}
  </group>}
-function RoomModel({base,lampOn,setLampOn,setFocus}:{base:string;lampOn:boolean;setLampOn:(v:boolean)=>void;setFocus:(v:FocusTarget)=>void}){return <group>
+function RoomModel({base,lampOn,setLampOn,setFocus,onCakeOpen}:{base:string;lampOn:boolean;setLampOn:(v:boolean)=>void;setFocus:(v:FocusTarget)=>void;onCakeOpen:()=>void}){return <group>
  <ambientLight intensity={lampOn?.72:.22}/><hemisphereLight args={['#f7dfbd','#39261d',1.05]}/><directionalLight castShadow position={[4,7,5]} intensity={1.6}/>{lampOn&&<pointLight position={[3.1,2.9,-1]} intensity={13} distance={7} color="#ffd08a"/>}
  <Box position={[0,-2.25,0]} args={[9.15,.35,7.95]} color="#33221c" radius={.1}/>
  <mesh rotation={[-Math.PI/2,0,0]} position={[0,-2.05,0]} receiveShadow><planeGeometry args={[8.8,7.55]}/><meshStandardMaterial color={C.wood} roughness={.82}/></mesh><Box position={[0,1,-3.65]} args={[8.1,6,.2]} color={C.wall}/><Box position={[-4,1,0]} args={[.2,6,7.4]} color="#1d3028"/><Box position={[4,1,0]} args={[.2,6,7.4]} color="#1d3028"/>
@@ -30,11 +30,82 @@ function RoomModel({base,lampOn,setLampOn,setFocus}:{base:string;lampOn:boolean;
  <group position={[-2.9,.5,-3.35]}><Box position={[0,0,0]} args={[1.2,4.05,.48]} color="#4a2d22"/>{[1.35,.55,-.25,-1.05].map((y,j)=><group key={y}>{[-.42,-.2,.02,.24,.46].map((x,i)=><Book key={x} x={x} y={y} z={.29} c={['#6c3c30','#344c3d','#8e6945','#4a5960'][((i+j)%4)]}/>)}</group>)}</group>
  <Photo src={`${base}photos/${PHOTOS[0]}`} position={[-3.76,1.9,-1.7]} rotation={[0,Math.PI/2,0]} onClick={()=>setFocus(PHOTOS[0])}/><Photo src={`${base}photos/${PHOTOS[1]}`} position={[3.76,1.85,-1.8]} rotation={[0,-Math.PI/2,0]} onClick={()=>setFocus(PHOTOS[1])}/><Photo src={`${base}photos/${PHOTOS[2]}`} position={[-.9,2.25,-3.52]} rotation={[0,0,.02]} onClick={()=>setFocus(PHOTOS[2])}/>
  <group position={[0,-.55,-2.15]}><Box position={[0,.72,0]} args={[3.65,1.6,.88]} color={C.sofa}/><Box position={[0,-.12,.48]} args={[3.9,.72,1.32]} color={C.sofa}/><Box position={[-1.85,.02,.48]} args={[.45,1.18,1.34]} color={C.sofa}/><Box position={[1.85,.02,.48]} args={[.45,1.18,1.34]} color={C.sofa}/><Box position={[-1.15,.65,.53]} args={[.68,.6,.25]} color={C.gold}/><Box position={[1.15,.65,.53]} args={[.68,.6,.25]} color={C.green}/>{[-1.25,0,1.25].map(x=><mesh key={x} position={[x,.76,.47]}><sphereGeometry args={[.055,12,12]}/><meshStandardMaterial color={C.dark}/></mesh>)}</group>
- <group position={[.25,-1.25,.45]}><Box position={[0,0,0]} args={[4.2,.22,1.75]} color="#70422f"/><Box position={[-1.65,-.75,0]} args={[.13,1.5,.13]} color={C.dark}/><Box position={[1.65,-.75,0]} args={[.13,1.5,.13]} color={C.dark}/><group position={[0,.45,0]} onClick={(e)=>{e.stopPropagation();setFocus('cake')}}><Cake/></group><Box position={[-1.25,.2,.18]} args={[.85,.12,.55]} color={C.green}/><mesh position={[-.6,.18,.18]} rotation={[-Math.PI/2,0,.1]}><planeGeometry args={[.65,.5]}/><meshStandardMaterial color="#e5d2a9"/></mesh><group position={[1.3,.32,.15]} onClick={(e)=>{e.stopPropagation();setFocus('calendar')}}><Box position={[0,0,0]} args={[.65,.92,.12]} color={C.cream}/><Text position={[0,.18,.08]} fontSize={.13} color={C.dark}>OCT</Text><Text position={[0,-.08,.08]} fontSize={.31} color={C.dark}>15</Text></group></group>
+ <group position={[.25,-1.25,.45]}><Box position={[0,0,0]} args={[4.2,.22,1.75]} color="#70422f"/><Box position={[-1.65,-.75,0]} args={[.13,1.5,.13]} color={C.dark}/><Box position={[1.65,-.75,0]} args={[.13,1.5,.13]} color={C.dark}/><group position={[0,.45,0]} onClick={(e)=>{e.stopPropagation();onCakeOpen()}}><Cake/></group><Box position={[-1.25,.2,.18]} args={[.85,.12,.55]} color={C.green}/><mesh position={[-.6,.18,.18]} rotation={[-Math.PI/2,0,.1]}><planeGeometry args={[.65,.5]}/><meshStandardMaterial color="#e5d2a9"/></mesh><group position={[1.3,.32,.15]} onClick={(e)=>{e.stopPropagation();setFocus('calendar')}}><Box position={[0,0,0]} args={[.65,.92,.12]} color={C.cream}/><Text position={[0,.18,.08]} fontSize={.13} color={C.dark}>OCT</Text><Text position={[0,-.08,.08]} fontSize={.31} color={C.dark}>15</Text></group></group>
  <group position={[-2.8,-1.05,.65]} onClick={(e)=>{e.stopPropagation();setFocus('tv')}}><Box position={[0,.48,0]} args={[1.65,1.48,.45]} color="#41261f"/><mesh position={[0,.5,.25]}><planeGeometry args={[1.25,1.03]}/><meshStandardMaterial color="#5c817f" emissive="#21363a" emissiveIntensity={.4}/></mesh><Text position={[0,.58,.28]} fontSize={.19} color={C.cream}>生日频道</Text><Text position={[0,.28,.28]} fontSize={.09} color={C.cream}>点击打开消息</Text><Box position={[-.48,-.45,0]} args={[.1,.5,.1]} color={C.dark}/><Box position={[.48,-.45,0]} args={[.1,.5,.1]} color={C.dark}/><Box position={[-.32,1.44,0]} args={[.055,.88,.055]} color={C.dark} rotation={[0,0,.52]} radius={.012}/><Box position={[.32,1.44,0]} args={[.055,.88,.055]} color={C.dark} rotation={[0,0,-.52]} radius={.012}/><mesh position={[-.55,1.82,0]}><sphereGeometry args={[.09,14,14]}/><meshStandardMaterial color={C.gold}/></mesh><mesh position={[.55,1.82,0]}><sphereGeometry args={[.09,14,14]}/><meshStandardMaterial color={C.gold}/></mesh></group>
  <group position={[3,-.1,-1.35]} onClick={(e)=>{e.stopPropagation();setLampOn(!lampOn)}}><mesh position={[0,1.15,0]}><coneGeometry args={[.65,.95,40]}/><meshStandardMaterial color="#d6ae70"/></mesh><Box position={[0,-.25,0]} args={[.08,2.9,.08]} color={C.dark}/><mesh position={[0,-1.72,0]}><cylinderGeometry args={[.55,.55,.1,36]}/><meshStandardMaterial color={C.dark}/></mesh></group>
  <group position={[2.75,-1.15,.6]}><Box position={[0,.65,0]} args={[1.2,1.45,.45]} color={C.green}/><Box position={[0,-.08,.3]} args={[1.25,.55,1.05]} color={C.green}/><Box position={[-.48,-.75,.28]} args={[.11,1.15,.11]} color={C.dark}/><Box position={[.48,-.75,.28]} args={[.11,1.15,.11]} color={C.dark}/></group>
  <group position={[-3.15,-.65,-2.25]}><Box position={[0,.1,0]} args={[1.3,.18,.75]} color="#5a3428"/><mesh position={[0,.65,0]}><torusGeometry args={[.28,.08,12,30]}/><meshStandardMaterial color="#a25b48"/></mesh><Box position={[0,-.6,0]} args={[.12,1.25,.12]} color={C.dark}/></group>
  <mesh rotation={[-Math.PI/2,0,0]} position={[.15,-1.92,.15]} receiveShadow><planeGeometry args={[5.7,3.4]}/><meshStandardMaterial color="#563930" roughness={1}/></mesh>
  </group>}
-export default function BirthdayRoom({onEnter}:BirthdayRoomProps){const[lampOn,setLampOn]=useState(true);const[focus,setFocus]=useState<FocusTarget>(null);const[controls,setControls]=useState<{rotateLeft:(a:number)=>void}|null>(null);const base=(import.meta.env.MIAODA_CLIENT_BASE_PATH||'').replace(/\/$/,'')+'/';return <section className="birthday-room birthday-room-3d"><header className="room-hud"><strong>生日不打烊</strong><span>10 · 15</span></header><Canvas shadows camera={{position:[0,3.1,15.2],fov:42}} dpr={[1,1.7]}><color attach="background" args={['#e9dfcf']}/><RoomModel base={base} lampOn={lampOn} setLampOn={setLampOn} setFocus={setFocus}/><OrbitControls ref={(v)=>setControls(v as unknown as {rotateLeft:(a:number)=>void})} target={[0,-.1,-.6]} enablePan={false} minDistance={10.8} maxDistance={18} minPolarAngle={.48} maxPolarAngle={1.5}/></Canvas><div className="room-orbit-bar"><Button size="icon" variant="outline" onClick={()=>controls?.rotateLeft(Math.PI/7)}><ChevronLeft/></Button><span>拖动可360°环绕和上下查看</span><Button size="icon" variant="outline" onClick={()=>controls?.rotateLeft(-Math.PI/7)}><ChevronRight/></Button></div>{focus&&<div className="room-focus-overlay" role="dialog" aria-modal="true"><button className="room-focus-close" onClick={()=>setFocus(null)}><X/></button>{PHOTOS.includes(focus as PhotoName)&&<div className="focus-photo-single"><img src={`${base}photos/${focus}`} alt="墙上的回忆"/></div>}{focus==='cake'&&<div className="focus-photo-single focus-cake-photo"><img src={`${base}photos/cake.jpg`} alt="生日蛋糕照片"/></div>}{focus==='calendar'&&<div className="focus-calendar"><CalendarDays/><p>10月15日</p><strong>今天是缤缤的生日</strong></div>}{focus==='tv'&&<div className="focus-tv"><div className="focus-tv-screen"><span className="tv-static"/><Tv/><h2>是否查看生日礼物？</h2><div className="tv-choice"><Button onClick={onEnter}>是</Button><Button variant="outline" onClick={()=>setFocus(null)}>否</Button></div></div></div>}</div>}</section>}
+export default function BirthdayRoom({ onEnter }: BirthdayRoomProps) {
+  const [lampOn, setLampOn] = useState(true);
+  const [focus, setFocus] = useState<FocusTarget>(null);
+  const [controls, setControls] = useState<{ rotateLeft: (angle: number) => void } | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const cakeAudioRef = useRef<HTMLAudioElement | null>(null);
+  const base = (import.meta.env.MIAODA_CLIENT_BASE_PATH || '').replace(/\/$/, '') + '/';
+
+  const stopCakeMedia = () => {
+    const video = videoRef.current;
+    const audio = cakeAudioRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
+
+  const openCakeVideo = () => {
+    setFocus('cake');
+  };
+
+  const closeFocus = () => {
+    stopCakeMedia();
+    setFocus(null);
+  };
+
+  useEffect(() => {
+    if (focus !== 'cake') return;
+    const video = videoRef.current;
+    const audio = cakeAudioRef.current;
+    if (video) {
+      video.currentTime = 0;
+      void video.play().catch(() => undefined);
+    }
+    if (audio) {
+      audio.currentTime = 0;
+      void audio.play().catch(() => undefined);
+    }
+    return () => {
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    };
+  }, [focus]);
+
+  return <section className="birthday-room birthday-room-3d">
+    <header className="room-hud"><strong>生日不打烊</strong><span>10 · 15</span></header>
+    <audio ref={cakeAudioRef} src={`${base}audio/obj_w5rDlsOJwrLDjj7CmsOj_45719504103_8c35_b919_8917_7fff02b60d715d3a02ae621ea77751cd.m4a`} loop preload="auto" />
+    <Canvas shadows camera={{ position: [0, 3.1, 15.2], fov: 42 }} dpr={[1, 1.7]}>
+      <color attach="background" args={['#e9dfcf']} />
+      <RoomModel base={base} lampOn={lampOn} setLampOn={setLampOn} setFocus={setFocus} onCakeOpen={openCakeVideo} />
+      <OrbitControls ref={(value) => setControls(value as unknown as { rotateLeft: (angle: number) => void })} target={[0, -.1, -.6]} enablePan={false} minDistance={10.8} maxDistance={18} minPolarAngle={.48} maxPolarAngle={1.5} />
+    </Canvas>
+    <div className="room-orbit-bar"><Button size="icon" variant="outline" onClick={() => controls?.rotateLeft(Math.PI / 7)}><ChevronLeft /></Button><span>拖动可360°环绕和上下查看</span><Button size="icon" variant="outline" onClick={() => controls?.rotateLeft(-Math.PI / 7)}><ChevronRight /></Button></div>
+    {focus && <div className="room-focus-overlay" role="dialog" aria-modal="true">
+      <button className="room-focus-close" type="button" onClick={closeFocus}><X /></button>
+      {PHOTOS.includes(focus as PhotoName) && <div className="focus-photo-single"><img src={`${base}photos/${focus}`} alt="墙上的回忆" /></div>}
+      {focus === 'cake' && <div className="focus-cake-video"><video ref={videoRef} src={`${base}video/cake-line-puppy-birthday.mp4`} muted loop playsInline autoPlay controls={false} preload="auto" /></div>}
+      {focus === 'calendar' && <div className="focus-calendar"><CalendarDays /><p>10月15日</p><strong>今天是缤缤的生日</strong></div>}
+      {focus === 'tv' && <div className="focus-tv"><div className="focus-tv-screen"><span className="tv-static" /><Tv /><h2>是否查看生日礼物？</h2><div className="tv-choice"><Button onClick={onEnter}>是</Button><Button variant="outline" onClick={closeFocus}>否</Button></div></div></div>}
+    </div>}
+  </section>;
+}
