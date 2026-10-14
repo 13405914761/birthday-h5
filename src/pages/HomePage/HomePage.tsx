@@ -19,7 +19,19 @@ export default function HomePage() {
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const appRef = useRef<HTMLElement | null>(null);
-  const [debugSkipPasswords, setDebugSkipPasswords] = useState(() => store.get('debugSkipPasswords', false));
+  const [debugSkipPasswords, setDebugSkipPasswords] = useState(false);
+  const [debugVisible, setDebugVisible] = useState(false);
+  const puppyTapsRef = useRef<number[]>([]);
+
+  // 连点两次封面小狗（700ms 内）才显示调试按钮
+  const handlePuppyTap = () => {
+    const now = Date.now();
+    puppyTapsRef.current = [...puppyTapsRef.current.filter((t) => now - t < 700), now];
+    if (puppyTapsRef.current.length >= 2) {
+      puppyTapsRef.current = [];
+      setDebugVisible(true);
+    }
+  };
 
   const maxUnlocked = debugSkipPasswords ? 25 : completed.length === 0 ? 1 : Math.min(25, Math.max(...completed) + 1);
   const completeChapter = (chapter: IChapter) => {
@@ -27,7 +39,6 @@ export default function HomePage() {
     setCompleted(next);
     store.set('completed', next);
     setActiveChapter(null);
-    window.setTimeout(() => document.getElementById(`age-${Math.min(25, chapter.age + 1)}`)?.scrollIntoView({ behavior: 'auto' }), 200);
   };
 
   const toggleMusic = () => {
@@ -55,9 +66,7 @@ export default function HomePage() {
     document.getElementById('age-1')?.scrollIntoView({ behavior: 'auto' });
   };
   const toggleDebugPasswords = () => {
-    const next = !debugSkipPasswords;
-    setDebugSkipPasswords(next);
-    store.set('debugSkipPasswords', next);
+    setDebugSkipPasswords((current) => !current);
   };
 
   return (
@@ -79,12 +88,14 @@ export default function HomePage() {
               <p className="cover-copy">从一岁开始，每拆开一份礼物，就解锁下一页。</p>
             </div>
           </div>
-          <PuppyPair mood="hug" />
+          <div className="cover-puppy-hotspot" onClick={handlePuppyTap} role="presentation"><PuppyPair mood="hug" /></div>
           <div className="cover-actions cover-actions-compact">
             <Button type="button" className="paper-button" onClick={() => { setStarted(true); document.getElementById('age-1')?.scrollIntoView({ behavior: 'smooth' }); }}>开始重新长大 <ArrowDown /></Button>
-            <Button type="button" variant="outline" className="debug-toggle" onClick={toggleDebugPasswords} aria-pressed={debugSkipPasswords}>
-              <Bug />调试：{debugSkipPasswords ? '密码已关闭' : '密码已开启'}
-            </Button>
+            {debugVisible && (
+              <Button type="button" variant="outline" className="debug-toggle" onClick={toggleDebugPasswords} aria-pressed={debugSkipPasswords}>
+                <Bug />调试：{debugSkipPasswords ? '密码已关闭' : '密码已开启'}
+              </Button>
+            )}
           </div>
           {completed.length > 0 && <button type="button" className="continue-link" onClick={() => document.getElementById(`age-${Math.min(25, maxUnlocked)}`)?.scrollIntoView({ behavior: 'smooth' })}>继续上次看到的地方</button>}
         </div>
@@ -101,7 +112,7 @@ export default function HomePage() {
       <section id="finale" className={`finale-section ${!memoryDone ? 'is-locked' : ''}`}>
         <div className="finale-card">
           <p>FINAL CHAPTER</p>
-          <h2>宝宝！25岁生日快乐</h2>
+          <h2>缤~25岁生日快乐</h2>
           <PuppyPair mood="gift" />
           <blockquote>前面的生日，是我想象着陪你走过。<br />从现在开始，未来的每一岁我都在你身边</blockquote>
           <div className="finale-dots" aria-label={`${completed.length}个章节已完成`}>{CHAPTERS.map((chapter) => <span key={chapter.id} className={completed.includes(chapter.id) ? 'done' : ''} />)}</div>

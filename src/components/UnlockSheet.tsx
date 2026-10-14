@@ -64,7 +64,7 @@ export default function UnlockSheet({ chapter, open, onClose, onSuccess }: Unloc
               <div className="success-state" aria-live="polite">
                 <motion.div className="stamp" initial={{ scale: 2, rotate: -18, opacity: 0 }} animate={{ scale: 1, rotate: -8, opacity: 1 }}>已解锁</motion.div>
                 <h2 id="unlock-title">这一岁，收好啦</h2>
-                <p>小白和小鸡毛正在为你打开下一页。</p>
+                <p>小白和小鸡毛把这一岁的礼物打开啦。</p>
               </div>
             ) : (
               <form onSubmit={submit} noValidate>

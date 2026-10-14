@@ -34,7 +34,7 @@ export const CHAPTERS: IChapter[] = [
   { id:18, age:18, year:2019, title:'给十八岁的你', gift:'金戒指', password:'324', image:'ch18-age18-updated.png', body:'十八岁是新的起点。这枚金戒指，把坚定、珍惜和我想给你的底气，轻轻戴在你手上。', action:'打开这一岁', motion:'金戒指缓缓转动，暖光沿着戒圈闪过' },
   { id:19, age:19, year:2020, title:'给十九岁的你', gift:'答案之书', password:'091', image:'ch19-age19.png', body:'没有标准答案也没关系，我们可以一起找。', action:'打开这一岁', motion:'书页翻动后停在这一页' },
   { id:20, age:20, year:2021, title:'给二十岁的你', gift:'刮刮乐', password:'023', image:'ch20-age20.png', body:'愿生活偶尔给你一些意想不到的小惊喜。', action:'打开这一岁', motion:'刮开区一点点显影' },
-  { id:21, age:21, year:2022, title:'给二十一岁的你', gift:'沐浴露', password:'100', image:'ch21-age21.png', body:'走向更大的世界，也要好好照顾自己。', action:'打开这一岁', motion:'水珠缓落，泡泡轻晃' },
+  { id:21, age:21, year:2022, title:'给二十一岁的你', gift:'星星人盲盒', password:'100', image:'ch21-age21-updated.png', body:'二十一岁也可以继续期待拆开未知的快乐。这个星星人盲盒，替我把一颗小小的幸运星送到你手里。', action:'打开这一岁', motion:'盲盒盖轻轻打开，星星人从盒中探头，两只小狗惊喜地靠在一起' },
   { id:22, age:22, year:2023, title:'这一岁，我们相遇了', gift:'相恋记忆桥', image:'ch22-bridge22.jpg', body:'2023年10月24日。从这里开始，我终于出现在你的故事里。', bridge:true, action:'我记得了，继续', motion:'两只小狗依偎，尾巴轻轻碰到一起' },
   { id:23, age:23, year:2024, title:'这一岁，我们毕业了', gift:'毕业记忆桥', image:'ch23-bridge23.jpg', body:'穿过校园与夏天，我们把青春认真收进同一张毕业照。', bridge:true, action:'我记得了，继续', motion:'学士帽流苏轻摆，两只小狗相视一笑' },
   { id:24, age:24, year:2025, title:'这一岁，我们隔着海想念', gift:'异地记忆桥', image:'ch24-bridge24-updated.png', body:'2025年，你在海口出差，我们第一次没能一起过生日。屏幕两端的祝福和后来补上的拥抱，都证明距离只是暂时的。', bridge:true, action:'我记得了，继续', motion:'两座小岛被一条发光的思念连起来，两只小狗隔海挥爪' },

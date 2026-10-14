@@ -17,7 +17,7 @@ export default function AgeChapter({ chapter, unlocked, completed, onOpen, onBri
   const reduced = useReducedMotion();
   const base = (import.meta.env.MIAODA_CLIENT_BASE_PATH || '').replace(/\/$/, '') + '/';
   return (
-    <section id={`age-${chapter.age}`} className={`age-section ${!unlocked ? 'is-locked' : ''}`} aria-label={`${chapter.age}岁章节`}>
+    <section id={`age-${chapter.age}`} className={`age-section ${!unlocked ? 'is-locked' : ''} ${!completed ? 'is-secret' : ''}`} aria-label={`${chapter.age}岁章节`}>
       <motion.div
         className="paper-noise"
         initial={reduced ? false : { opacity: 0, y: 22 }}
